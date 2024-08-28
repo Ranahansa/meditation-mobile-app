@@ -1,6 +1,11 @@
-import { Slot } from "expo-router";
-export default function RootLayout(){
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Slot } from 'expo-router'
+
+const RootLayout = () => {
     return (
-        <Slot />
+            <Slot />
     )
 }
+
+export default RootLayout
