@@ -9,21 +9,31 @@ import CustomButton from '@/components/CustomButton';
 const Meditate = () => {
     
     const {id} = useLocalSearchParams()
-    const [secondsRemaining, setSecondsRemaining] = useState(10)
+    const [secondsRemaining, setSecondsRemaining] = useState(10);
+    const [isMeditating, setMeditating] = useState(false);
 
     useEffect(() => {
         let timerId: NodeJS.Timeout;
         
         if(secondsRemaining ===0){
+            setMeditating(false)
             return
         }
-        timerId = setTimeout(() => {
+
+        if (isMeditating) {
+            
+            timerId = setTimeout(() => {
             setSecondsRemaining(secondsRemaining - 1)
         }, 1000)
+        }
+        
         return () => {
             clearTimeout(timerId);
         }
-    }, [])
+    }, [secondsRemaining, isMeditating])
+
+    const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
+    const formattedTimeSeconds = String(secondsRemaining % 60).padStart(2, '0');
     
     return (
         <View className='flex-1'>
@@ -40,12 +50,12 @@ const Meditate = () => {
                     <View className='justify-center flex-1'>
                         <View className='items-center justify-center mx-auto rounded-full bg-neutral-200 w-44 h-44'>
                             <Text className='text-3xl font-bold text-center text-white'>
-                                00:{secondsRemaining}
+                                {formattedTimeMinutes}:{formattedTimeSeconds}
                             </Text>
                         </View>
                     </View>
                     <View className='mb-5'>
-                        <CustomButton title="Start Meditation" onPress={() => {}} containerStyles={'bg-white'} />
+                        <CustomButton title="Start Meditation" onPress={() => setMeditating(true)} containerStyles={'bg-white'} />
                     </View>
                 </AppGradient>
             </ImageBackground>
