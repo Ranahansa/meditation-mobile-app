@@ -11,9 +11,10 @@ const Meditate = () => {
             resizeMode='cover' 
             className='flex-1'>
                 <AppGradient colors={["transparent", 'rgba(0, 0, 0, 0.8)']}>
-                    <Pressable>
+                    <Pressable
                         onPress={() => router.back()}
                         className="absolute z-10 top-16 left-6"
+                    >
                     </Pressable>
                 </AppGradient>
             </ImageBackground>
